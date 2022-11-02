@@ -1,9 +1,11 @@
 # Environment
 
-Set environment variables via .env file or array.
+Set environment variables via a `.env file` or an `associative array`.
 
-Overrides vars on `$_SERVER` with the same key.
+Overrides variables already set on `$_SERVER` with the same key.
+
 Keys are case-sensitive. 
+
 **Env Var keys should be upper case by convention.** 
 
 
