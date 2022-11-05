@@ -19,5 +19,4 @@ class LoaderDotenv implements LoaderInterface
         $dotenv = Dotenv::createMutable($this->env_path, $this->names);
         $dotenv->load();
     }
-
 }
