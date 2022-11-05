@@ -15,35 +15,40 @@ class Env
     }
 
     /**
-     * Fetches Environment Variable
+     * Fetches Environment Variable from $_SERVER.
      */
-    public static function get(string $key): string|false
+    public static function get(string $key): string
     {
-        if (
-            isset($_SERVER[$key]) &&
-            is_string($_SERVER[$key]) &&
-            $_SERVER[$key] !== ''
-        ) {
-            return $_SERVER[$key];
+        if (!isset($_SERVER[$key])) {
+            return '';
         }
-        return false;
+        return (string)$_SERVER[$key];
     }
 
     /**
      * @param string[] $keys
-     * @return string[] name of missing key
+     * @return string[] missing keys
      */
     public static function missing(array $keys): array
     {
         $missing = [];
         foreach ($keys as $key) {
-            if (
-                !isset($_SERVER[$key]) ||
-                $_SERVER[$key] === ''
-            ) {
+            $value = self::get($key);
+            if ($value === '') {
                 $missing[] = $key;
             }
         }
         return $missing;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public static function isTrue(string $key): bool
+    {
+        $value = self::get($key);
+        $trim = trim(strtolower($value));
+        return in_array($trim, ['1', 'true']);
     }
 }

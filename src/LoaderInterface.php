@@ -10,5 +10,4 @@ namespace Stock2Shop\Environment;
 interface LoaderInterface
 {
     public function set(): void;
-
 }
